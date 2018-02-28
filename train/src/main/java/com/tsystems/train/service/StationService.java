@@ -1,5 +1,6 @@
 package com.tsystems.train.service;
 
+
 import com.tsystems.train.entity.Station;
 
 import java.util.List;
@@ -42,5 +43,3 @@ public interface StationService {
      */
     void archive(Station station);
 }
-
-

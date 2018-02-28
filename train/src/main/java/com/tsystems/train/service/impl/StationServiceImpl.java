@@ -24,7 +24,6 @@ public class StationServiceImpl implements StationService {
         log.debug("StationService: {} save to repository", station.getName());
         stationRepository.save(station);
         log.debug("StationService: {} successfully saved to repository", station.getName());
-
     }
 
     @Override
@@ -46,12 +45,12 @@ public class StationServiceImpl implements StationService {
 
     @Override
     public Station getStationById(String id) {
-        return stationRepository.getOne(id);
+        return stationRepository.findById(id).orElse(null);
     }
 
     @Override
+    @Transactional
     public void archive(Station station) {
-        Station archivedStation = station.toBuilder().status(EntityStatus.ARCHIVED).build();
-        stationRepository.save(archivedStation);
+        stationRepository.updateStatus(station.getId(), EntityStatus.ARCHIVED);
     }
 }

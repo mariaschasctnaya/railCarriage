@@ -12,6 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder(toBuilder = true)
 @EqualsAndHashCode(of = "name")
+@ToString
 public class Station {
 
     @Id
@@ -25,4 +26,5 @@ public class Station {
     @Column(nullable = false)
     @Builder.Default
     private EntityStatus status = EntityStatus.ACTIVE;
+
 }

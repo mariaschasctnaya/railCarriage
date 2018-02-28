@@ -1,20 +1,29 @@
 package com.tsystems.train.config;
 
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import java.util.List;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.tsystems.train.controller")
+@ComponentScan("com.tsystems.train.controllers")
 public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-              registry.addViewController("/").setViewName("station");
-         }
+        registry.addViewController("/login").setViewName("login");
+        registry.addViewController("/routes").setViewName("manager/routes");
+        registry.addViewController("/stations").setViewName("manager/station");
+        registry.addViewController("/trains").setViewName("manager/trains");
+    }
 
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
@@ -36,4 +45,16 @@ public class WebConfig implements WebMvcConfigurer {
                 .addResourceLocations("/img/");
     }
 
-  }
+    @Override
+    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+        for (HttpMessageConverter<?> converter : converters) {
+            if (converter instanceof MappingJackson2HttpMessageConverter) {
+                MappingJackson2HttpMessageConverter jsonMessageConverter = (MappingJackson2HttpMessageConverter) converter;
+                ObjectMapper objectMapper = jsonMessageConverter.getObjectMapper();
+                objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+                break;
+            }
+        }
+    }
+
+}

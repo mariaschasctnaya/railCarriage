@@ -1,4 +1,4 @@
-package com.tsystems.train.controller;
+package com.tsystems.train.controllers;
 
 import com.tsystems.train.facade.data.ResponseData;
 import lombok.extern.slf4j.Slf4j;

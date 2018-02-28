@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder(toBuilder = true)
 @EqualsAndHashCode(of = {"name", "surname", "birthday"})
+@ToString(exclude = "tickets")
 public class Passenger {
 
     @Id @GeneratedValue(generator="system-uuid")

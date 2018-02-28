@@ -31,7 +31,7 @@ public class Train {
     @Builder.Default
     private EntityStatus status = EntityStatus.ACTIVE;
 
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.EAGER)
     private Route route;
 
     @OneToMany(mappedBy = "train", fetch = FetchType.EAGER)

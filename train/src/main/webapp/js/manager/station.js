@@ -221,6 +221,39 @@ var StationTimeTable = {
         $("#dialog-update").modal('hide');
     },
 
+    updateStatus: function () {
+        var status = $("#selectStatus :selected").val();
+        var delayTime = $("#delayTime").val();
+        if(status == "DELAYED" && !(/^\d+$/.test(delayTime))) {
+            return;
+        }
+        var station = StationTimeTable.station;
+        var trainNumber = StationTimeTable.selectedTimetable.number;
+        $.ajax({
+            url: "train/status",
+            async: false,
+            method: 'PUT',
+            data: {
+                "status" : status,
+                "station" : station,
+                "trainNumber" : trainNumber,
+                "delayTime" : (delayTime ? delayTime : null)
+            },
+            success: function (data) {
+                StationTimeTable.closeUpdateDialog();
+                StationTimeTable.clearDataTable();
+                StationTimeTable.station = station;
+                var timetableTable = StationTimeTable.createDataTable(station);
+            },
+            error: function (response) {
+                $("#errorMessage").html(response.message);
+                $("#block_error").removeClass("invisible");
+            }
+        });
+    },
+
+
+
     createDataTable : function (station) {
         return $('#timetable_table').dataTable({
             "sDom": "<'row'<'span4'l><'span4 search_table'f>r>t<'row'<'span4'i><'span4 offset4'p>>",
