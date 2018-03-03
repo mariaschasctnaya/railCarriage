@@ -120,7 +120,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <div id="delete_dialog_message">Do you want really want remove this route:<span
+                    <div id="delete_dialog_message">Do you really want remove this route<span
                             id="removeRoute"></span> ?
                     </div>
                 </div>

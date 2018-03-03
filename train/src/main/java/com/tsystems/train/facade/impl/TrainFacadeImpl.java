@@ -9,7 +9,6 @@ import com.tsystems.train.facade.converter.DtoConverter;
 import com.tsystems.train.facade.data.SearchTrainData;
 import com.tsystems.train.facade.data.TrainData;
 import com.tsystems.train.service.RouteService;
-import com.tsystems.train.service.StationStatusService;
 import com.tsystems.train.service.TrainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,8 +25,6 @@ public class TrainFacadeImpl implements TrainFacade {
     private TrainService trainService;
     @Autowired
     private RouteService routeService;
-    @Autowired
-    private StationStatusService stationStatusService;
     @Autowired
     private DtoConverter<TrainData, Train> createTrainDataConverter;
     @Autowired
@@ -81,25 +78,6 @@ public class TrainFacadeImpl implements TrainFacade {
     }
 
 
-    @Override
-    public void updateStatus(String trainNumber, String station, String status, Integer delayTime) {
-        Train train = trainService.getTrainByNumber(trainNumber);
-        train.getStationStatuses().stream()
-                .filter(stationStatus -> byStation(stationStatus, station))
-                .forEach(stationStatus -> updateStatus(stationStatus, status, delayTime));
-        train.getStationStatuses().stream()
-                .filter(stationStatus -> byStation(stationStatus, station))
-                .forEach(stationStatusService::update);
-    }
-
-    private void updateStatus(StationStatus stationStatus, String status, Integer delay) {
-        stationStatus.setDelay(delay);
-        stationStatus.setStatus(StationStatus.Status.valueOf(status));
-    }
-
-    private boolean byStation(StationStatus status, String station) {
-        return status.getStation().getName().equals(station);
-    }
 
     @Override
     public void archiveTrain(String id) {

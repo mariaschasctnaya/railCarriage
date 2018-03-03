@@ -44,8 +44,9 @@ public class TrainServiceImpl implements TrainService {
     public void checkAvailableTrainByStation(Train train, String station) {
         log.debug("TrainService: check available train {} for station {}", train.getNumber(), station);
         Optional.ofNullable(train.getRoute())
-                //
+                //if there is a route - converting routes to stream routes
                 .map(Stream::of)
+                //if there is no route  -return an empty stream
                 .orElseGet(Stream::empty)
                 .map(Route::getRouteEntries).flatMap(Collection::stream)
                 .filter(routeEntry -> filterRouteByStation(routeEntry, station))

@@ -24,15 +24,6 @@ public interface TrainFacade {
     List<TrainData> getTrains(String station, boolean filter);
 
     /**
-     * Updates status for given station and train number
-     * @param trainNumber - train number
-     * @param station - station name
-     * @param status - new status
-     * @param delayTime
-     */
-    void updateStatus(String trainNumber, String station, String status, Integer delayTime);
-
-    /**
      * Archive given train
      * @param id - train id
      */

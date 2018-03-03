@@ -109,7 +109,6 @@ var Route = {
     },
 
     openRemoveDialog: function () {
-        $("#removeRoute").html(Route.selectedRoute.id);
         $("#dialog-remove").modal('show');
     },
 

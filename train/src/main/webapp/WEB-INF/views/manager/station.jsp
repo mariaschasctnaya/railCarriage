@@ -75,13 +75,12 @@
     <div class="container filter-blur rounded popin" id="stationTimetable">
         <h4>Station's timetable</h4>
         <table id="timetable_table" class="table table-hover display" cellspacing="0" width="100%">
-            <button id="updateStatus" class="btn br2" disabled>Update</button>
+            <%--<button id="updateStatus" class="btn br2" disabled>Update</button>--%>
             <thead>
             <tr>
                 <th>Train</th>
                 <th>Arrival</th>
                 <th>Departure</th>
-                <th>Status</th>
             </tr>
             </thead>
             <tbody id="timetable_body" class="table table-hover text-dark">
@@ -145,36 +144,36 @@
     </div>
 
     <%--/////////////////////////Modal UPDATE Train/////////////////////////////// --%>
-    <div id="dialog-update" class="modal fade">
-        <div class="modal-dialog popap">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Update train status</h4>
-                    <button id="closeUpdateDialog" type="button" class="close">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div>
-                        <select id="selectStatus" name="selectStatus">
-                            <option value="OK">OK</option>
-                            <option value="DELAYED">DELAYED</option>
-                            <option value="CANCELED">CANCELED</option>
-                        </select>
-                    </div>
-                    <div id="delay" style="display: none">
-                        <label for="delayTime">Delay in minutes</label>
-                        <input name="delayTime" type="text" id="delayTime"/>
-                    </div>
-                </div>
+    <%--<div id="dialog-update" class="modal fade">--%>
+        <%--<div class="modal-dialog popap">--%>
+            <%--<div class="modal-content">--%>
+                <%--<div class="modal-header">--%>
+                    <%--<h4 class="modal-title">Update train status</h4>--%>
+                    <%--<button id="closeUpdateDialog" type="button" class="close">&times;</button>--%>
+                <%--</div>--%>
+                <%--<div class="modal-body">--%>
+                    <%--<div>--%>
+                        <%--<select id="selectStatus" name="selectStatus">--%>
+                            <%--<option value="OK">OK</option>--%>
+                            <%--<option value="DELAYED">DELAYED</option>--%>
+                            <%--<option value="CANCELED">CANCELED</option>--%>
+                        <%--</select>--%>
+                    <%--</div>--%>
+                    <%--<div id="delay" style="display: none">--%>
+                        <%--<label for="delayTime">Delay in minutes</label>--%>
+                        <%--<input name="delayTime" type="text" id="delayTime"/>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
 
-                <div class="modal-footer">
-                    <button id="closeUpdateDialogA" type="button" class="btn br2">Close</button>
-                    <button type="button" id="updateStatusButton" class="btn br2">Update</button>
-                </div>
-            </div>
-        </div>
+                <%--<div class="modal-footer">--%>
+                    <%--<button id="closeUpdateDialogA" type="button" class="btn br2">Close</button>--%>
+                    <%--<button type="button" id="updateStatusButton" class="btn br2">Update</button>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+        <%--</div>--%>
 
-    </div>
-</div>
+    <%--</div>--%>
+<%--</div>--%>
 <%--/////////////////////////////////////////////////////////--%>
 <div id="toTop" class="text-light">^</div>
 </body>

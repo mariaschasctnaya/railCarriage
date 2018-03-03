@@ -292,16 +292,11 @@ var StationTimeTable = {
                 {
                     "mData": "stationSchedules",
                     "render": function (data, type, row) {
-                        return StationTimeTable.formatDate(data[station].arrive);
+                        return StationTimeTable.formatDate(data[station].departure);
                     },
                     "targets": 2
                 },
                 {
-                    "mData": "stationSchedules",
-                    "render": function (data, type, row) {
-                        return "<div class='" + data[station].status + "'>" + data[station].status + "</div>";
-                    },
-                    "targets": 3
                 }
             ]
         });

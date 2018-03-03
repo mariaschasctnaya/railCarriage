@@ -13,8 +13,6 @@ import java.text.MessageFormat;
 
 public class BaseController {
 
-
-
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     private ResponseData handleCommonException(Exception ex) {

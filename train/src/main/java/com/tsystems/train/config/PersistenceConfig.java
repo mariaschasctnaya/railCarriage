@@ -21,6 +21,7 @@ import javax.sql.DataSource;
 public class PersistenceConfig {
 
     @Bean
+    /*Settings for connecting to the database */
     public DataSource dataSource(@Value("${spring.datasource.url}") String url,
                                  @Value("${spring.datasource.driver-class-name}") String driver,
                                  @Value("${spring.datasource.username}") String username,
