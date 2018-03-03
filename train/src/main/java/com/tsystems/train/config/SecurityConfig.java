@@ -37,13 +37,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
-        //Web resources
+        //This requests do not need to be secured
         web.ignoring().antMatchers("/css/**");
         web.ignoring().antMatchers("/js/**");
         web.ignoring().antMatchers("/images/**");
     }
 
     @Override
+    //method that determines what is UserDetail
     public UserDetailsService userDetailsService() {
         return new UserServiceImpl();
     }
