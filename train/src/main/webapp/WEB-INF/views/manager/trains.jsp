@@ -9,10 +9,8 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <link rel="stylesheet" type="text/css" href="<c:url value="/css/bootstrap-responsive.css"/>"/>
     <link rel="stylesheet" type="text/css" href="<c:url value="/css/bootstrap.css"/>" media="all">
-
     <link rel="stylesheet" type="text/css" href="<c:url value="/css/jquery.dataTables.css"/>" media="all">
     <link rel="stylesheet" type="text/css" href="<c:url value="/css/jquery-ui.min.css"/>" media="all">
     <script type="text/javascript" src="<c:url value="/js/jquery.js"/>"></script>
@@ -25,6 +23,7 @@
     <script type="text/javascript" src="<c:url value="/js/topButton.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/js/jquery-ui.min.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/js/jquery.cookie.js"/>"></script>
+
 </head>
 <body onload="createDataTableTrain()">
 <div class="container block-center-div">
@@ -63,7 +62,7 @@
         <div class="container-fluid">
             <table id="trains_table" class="display" cellspacing="0" width="100%">
                 <button id="create" class="btn br2">New</button>
-                <button id="remove" class="btn br2" disabled>Remove</button>
+                <button id="remove" class="btn br2" disabled>Archive</button>
                 <div>
                     <input class="button-tools" type="checkbox" id="filter-archived">
                     Show only active</input>
@@ -105,9 +104,7 @@
 </div>
 
 
-<%--////////////////////////////////////////////Modal windows//////////////////////////////////////////--%>
-
-<%--////////////////////////////////////////////New Train/////////////////////////////////////////////--%>
+<%--////////////////////////////////////////////Modal create/////////////////////////////////////////////--%>
 <div id="dialog-form" class="modal fade" role="dialog">
     <div class="modal-dialog popap-routes modal-lg">
         <div class="modal-content text-light">
@@ -142,22 +139,22 @@
 </div>
 
 
-<%--/////////////////////////////////////Delete////////////////////////////////////////////////////--%>
+<%--/////////////////////////////////////Modal archive////////////////////////////////////////////////////--%>
 <div id="dialog-remove" class="modal fade">
     <div class="modal-dialog popap modal-lg">
         <div class="modal-content text-light">
             <div class="modal-header">
-                <h4 class="modal-title">Delete Train</h4>
+                <h4 class="modal-title">Archive Train</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-                <div id="delete_dialog_message">Do you want really remove train with number :<span
+                <div id="delete_dialog_message">Do you really want archive train with number :<span
                         id="removeTrain"></span> ?
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn br2" data-dismiss="modal">Cancel</button>
-                <button id="removeTrainButton" type="button" class="btn br2">Delete</button>
+                <button id="removeTrainButton" type="button" class="btn br2">Archive</button>
             </div>
         </div>
     </div>

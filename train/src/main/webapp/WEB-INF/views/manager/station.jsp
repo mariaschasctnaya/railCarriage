@@ -55,7 +55,7 @@
     <div class="container filter-blur rounded popin vcenter">
         <table id="stations_table" class="display" cellspacing="0" width="100%">
             <button id="create" class="btn br2">New</button>
-            <button id="remove" class="btn br2" disabled>Remove</button>
+            <button id="remove" class="btn br2" disabled>Archive</button>
             <div><input class="button-tools" type="checkbox" id="filter-archived">Show only active</input></div>
             <thead>
             <tr>
@@ -75,7 +75,6 @@
     <div class="container filter-blur rounded popin" id="stationTimetable">
         <h4>Station's timetable</h4>
         <table id="timetable_table" class="table table-hover display" cellspacing="0" width="100%">
-            <%--<button id="updateStatus" class="btn br2" disabled>Update</button>--%>
             <thead>
             <tr>
                 <th>Train</th>
@@ -91,8 +90,7 @@
 </div>
 
 
-
-<%--//////////////////////////////Modal Creat train///////////////////////////////////--%>
+<%--//////////////////////////////Modal create///////////////////////////////////--%>
 <div class="text-light">
     <div id="dialog-form" class="modal fade">
         <div class="modal-dialog popap">
@@ -122,7 +120,7 @@
         </div>
     </div>
 
-    <%--/////////////////////////Modal DELET train///////////////////////////////////--%>
+    <%--/////////////////////////Modal archive///////////////////////////////////--%>
     <div id="dialog-remove" class="modal fade">
         <div class="modal-dialog popap">
             <div class="modal-content">
@@ -131,50 +129,17 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <div id="delete_dialog_message">Do you want really remove station with name: <span
+                    <div id="delete_dialog_message">Do you really  want archive station with name: <span
                             id="removeStation"></span> ?
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn br2" data-dismiss="modal">Cancel</button>
-                    <button id="removeStationButton" type="button" class="btn br2">Delete</button>
+                    <button id="removeStationButton" type="button" class="btn br2">Archive</button>
                 </div>
             </div>
         </div>
     </div>
-
-    <%--/////////////////////////Modal UPDATE Train/////////////////////////////// --%>
-    <%--<div id="dialog-update" class="modal fade">--%>
-        <%--<div class="modal-dialog popap">--%>
-            <%--<div class="modal-content">--%>
-                <%--<div class="modal-header">--%>
-                    <%--<h4 class="modal-title">Update train status</h4>--%>
-                    <%--<button id="closeUpdateDialog" type="button" class="close">&times;</button>--%>
-                <%--</div>--%>
-                <%--<div class="modal-body">--%>
-                    <%--<div>--%>
-                        <%--<select id="selectStatus" name="selectStatus">--%>
-                            <%--<option value="OK">OK</option>--%>
-                            <%--<option value="DELAYED">DELAYED</option>--%>
-                            <%--<option value="CANCELED">CANCELED</option>--%>
-                        <%--</select>--%>
-                    <%--</div>--%>
-                    <%--<div id="delay" style="display: none">--%>
-                        <%--<label for="delayTime">Delay in minutes</label>--%>
-                        <%--<input name="delayTime" type="text" id="delayTime"/>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-
-                <%--<div class="modal-footer">--%>
-                    <%--<button id="closeUpdateDialogA" type="button" class="btn br2">Close</button>--%>
-                    <%--<button type="button" id="updateStatusButton" class="btn br2">Update</button>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-
-    <%--</div>--%>
-<%--</div>--%>
-<%--/////////////////////////////////////////////////////////--%>
 <div id="toTop" class="text-light">^</div>
 </body>
 </html>
