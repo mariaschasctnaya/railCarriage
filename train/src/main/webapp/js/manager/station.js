@@ -80,29 +80,47 @@ var Station = {
     },
 
     createStation: function () {
+        // var station = new Station($("#statinonName").val());
         var response = null;
-        $.ajax({
-            url: "station/",
-            async: false,
-            method: 'POST',
-            contentType: "application/json",
-            dataType: "json",
-            data: JSON.stringify({
-                "name" : $("#name").val()
-            }),
-            success: function (data) {
-                response = data;
-                Station.closeCreateDialog();
-                Station.reloadTable();
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                $("#error_server_message").html(jqXHR.responseJSON.message);
-                $(".error-server-block").removeClass("invisible");
-            }
-        });
-    },
+        if (validateStationData()) {
+            $.ajax({
+                url: "station/",
+                async: false,
+                method: 'POST',
+                contentType: "application/json",
+                dataType: "json",
+                data: JSON.stringify({
+                    "name": $("#name").val()
+                }),
+                success: function (data) {
+                    response = data;
+                    Station.closeCreateDialog();
+                    Station.reloadTable();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    $("#error_server_message").html(jqXHR.responseJSON.message);
+                    $(".error-server-block").removeClass("invisible");
+                }
+            });
+        }
 
-    removeStation: function () {
+        function validateStationData() {
+            var stationName = $("#name").val();
+            var exceptionMessage = "";
+            var reqExpForName = new RegExp("^[a-zA-Z]'?([a-zA-Z]|\\.| |-)+$");
+            if (!reqExpForName.test(stationName)) {
+                $("#name").addClass("errorField");
+                exceptionMessage += "Station Name;";
+            }
+            if (exceptionMessage != "") {
+                $("#errorMessage").html("Incorrect format of next field: " + exceptionMessage);
+                $("#block_error").removeClass("invisible");
+                return false;
+            }
+            return true;
+        }
+    },
+    removeStation: function() {
         var response = null;
         $.ajax({
             type: "DELETE",

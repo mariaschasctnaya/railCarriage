@@ -9,6 +9,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Map;
@@ -27,5 +28,6 @@ public class RouteData {
     @Size(min = 2)
     @ScheduleConstraint
     @JsonView(View.UI.class)
+    @Valid
     private Map<String, ScheduleData> stationSchedules;
 }

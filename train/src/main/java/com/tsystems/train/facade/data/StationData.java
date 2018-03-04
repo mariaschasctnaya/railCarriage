@@ -20,7 +20,7 @@ public class StationData {
     private String id;
 
     @NotNull
-    @Pattern(regexp = ".*[\\S]+.*")
+    @Pattern(regexp = "^[a-zA-Z]'?([a-zA-Z]|\\.| |-)+")
     @JsonView(View.UI.class)
     private String name;
 

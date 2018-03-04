@@ -13,10 +13,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class SearchTrainData {
     @NotNull
-    @Pattern(regexp = ".*[\\S]+.*")
+    @Pattern(regexp = "^[a-zA-Z]'?([a-zA-Z]|\\.| |-)+")
     private String departure;
     @NotNull
-    @Pattern(regexp = ".*[\\S]+.*")
+    @Pattern(regexp = "^[a-zA-Z]'?([a-zA-Z]|\\.| |-)+")
     private String arrived;
     @NotNull
     private LocalDateTime startDate;

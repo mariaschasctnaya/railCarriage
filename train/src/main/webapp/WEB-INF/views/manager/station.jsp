@@ -21,6 +21,8 @@
     <script type="text/javascript" src="<c:url value="/js/manager/station.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/js/jquery-ui.min.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/js/jquery.cookie.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/js/modalWindows.js"/>"></script>
+
 </head>
 <body onload="createDataTableStation()">
 <div class="container block-center-div">
@@ -88,9 +90,7 @@
     </div>
 
 </div>
-
-
-<%--//////////////////////////////Modal create///////////////////////////////////--%>
+<%--//////////////////////////////Modal Create train///////////////////////////////////--%>
 <div class="text-light">
     <div id="dialog-form" class="modal fade">
         <div class="modal-dialog popap">
@@ -120,7 +120,7 @@
         </div>
     </div>
 
-    <%--/////////////////////////Modal archive///////////////////////////////////--%>
+    <%--/////////////////////////Modal Archive train///////////////////////////////////--%>
     <div id="dialog-remove" class="modal fade">
         <div class="modal-dialog popap">
             <div class="modal-content">
@@ -129,7 +129,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <div id="delete_dialog_message">Do you really  want archive station with name: <span
+                    <div id="delete_dialog_message">Do you  really want archive station with name: <span
                             id="removeStation"></span> ?
                     </div>
                 </div>
