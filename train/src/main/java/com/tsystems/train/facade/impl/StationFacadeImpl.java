@@ -2,6 +2,7 @@ package com.tsystems.train.facade.impl;
 
 import com.tsystems.train.entity.EntityStatus;
 import com.tsystems.train.entity.Station;
+import com.tsystems.train.facade.RouteFacade;
 import com.tsystems.train.facade.StationFacade;
 import com.tsystems.train.facade.converter.DtoConverter;
 import com.tsystems.train.facade.data.StationData;
@@ -21,6 +22,8 @@ public class StationFacadeImpl implements StationFacade {
     private DtoConverter<StationData, Station> stationDataConverter;
     @Autowired
     private DtoConverter<Station, StationData> stationConverter;
+    @Autowired
+    private RouteFacade routeFacade;
 
 
 
@@ -43,6 +46,7 @@ public class StationFacadeImpl implements StationFacade {
     public void archiveStation(String id) {
         Station station = stationService.getStationById(id);
         stationService.archive(station);
+        routeFacade.archiveRouteByStation(station.getName());
     }
 
     private Stream<Station> getStations(String station) {

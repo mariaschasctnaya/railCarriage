@@ -37,6 +37,18 @@ public class TrainController {
         return trainFacade.getTrains(station, true);
     }
 
+    @GetMapping("/search")
+    public List<TrainData> searchTrains(@RequestBody @RequestParam("departure") String departure, @RequestParam("arrived") String arrived,
+                                        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) @RequestParam("startDate") LocalDateTime startDate,
+                                        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) @RequestParam("endDate") LocalDateTime endDate) {
+        SearchTrainData searchTrainData = new SearchTrainData();
+        searchTrainData.setArrived(arrived);
+        searchTrainData.setDeparture(departure);
+        searchTrainData.setEndDate(endDate);
+        searchTrainData.setStartDate(startDate);
+        log.debug("TrainController: search available trains for {} between {} and {}", searchTrainData.getStartDate(), searchTrainData.getDeparture(), searchTrainData.getArrived());
+        return trainFacade.searchTrains(searchTrainData);
+    }
     @DeleteMapping("/{id}")
     @Secured("ROLE_MANAGER")
     public ResponseData archiveTrain(@PathVariable String id) {

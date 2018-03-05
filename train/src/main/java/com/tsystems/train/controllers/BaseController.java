@@ -1,5 +1,9 @@
 package com.tsystems.train.controllers;
 
+
+import com.tsystems.train.exception.PassengerExistsException;
+import com.tsystems.train.exception.ScheduleNotValidException;
+import com.tsystems.train.exception.StationsScheduleHasWrongOrder;
 import com.tsystems.train.facade.data.ResponseData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -8,14 +12,33 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.text.MessageFormat;
+import java.util.Optional;
 
 @Slf4j
-
 public class BaseController {
+
+    @ExceptionHandler(ScheduleNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    private ResponseData handleScheduleValidationException(ScheduleNotValidException ex) {
+        return buildErrorResponse(ex);
+    }
+
+
+    @ExceptionHandler(StationsScheduleHasWrongOrder.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    private ResponseData handleScheduleOrderValidationException(StationsScheduleHasWrongOrder ex) {
+        return buildErrorResponse(ex);
+    }
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     private ResponseData handleCommonException(Exception ex) {
+        return buildErrorResponse(ex);
+    }
+
+    @ExceptionHandler(PassengerExistsException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    private ResponseData handlePassengerExistsException(PassengerExistsException ex) {
         return buildErrorResponse(ex);
     }
 
@@ -29,7 +52,7 @@ public class BaseController {
         log.error(ex.getMessage(), ex);
         return ResponseData.builder()
                 .success(false)
-                .message(ex.getCause().getMessage())
+                .message(Optional.of(ex).map(Exception::getCause).map(Throwable::getMessage).orElse(ex.getMessage()))
                 .build();
     }
 
