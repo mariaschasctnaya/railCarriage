@@ -71,6 +71,7 @@ var Station = {
     },
 
     openCreateDialog: function () {
+        $("#block_error").addClass("invisible");
         $("#dialog-form").modal('show');
     },
 
