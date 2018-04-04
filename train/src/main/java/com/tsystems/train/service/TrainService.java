@@ -65,8 +65,15 @@ public interface TrainService {
 
 
     /**
-     * Archive train
+     * с
      * @param train - train
      */
     void archive(Train train);
+
+    /**
+     * Gets all trains by route
+     * @param route - route id
+     * @return - trains
+     */
+    List<Train> getTrainsByRoute(Route route);
 }

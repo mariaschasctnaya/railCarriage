@@ -4,9 +4,13 @@ import com.tsystems.train.facade.TicketFacade;
 import com.tsystems.train.facade.data.TicketData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+
 
 @Slf4j
 @RestController
@@ -23,8 +27,14 @@ public class TicketController extends BaseController {
     }
 
     @GetMapping
-    public int getCountTicketsOfTrains(@RequestBody @RequestParam("number") String number) {
-        return ticketFacade.findCountTicketByTrain(number);
+    @Secured("ROLE_USER")
+    public List<TicketData> getTicketsForUser(Authentication authentication) {
+        return ticketFacade.getTicketsForUser(authentication.getName());
     }
 
+    @GetMapping("/{number}")
+    public int getCountTicketsOfTrains(@PathVariable String number) {
+        return ticketFacade.findCountTicketByTrain(number);
+    }
 }
+

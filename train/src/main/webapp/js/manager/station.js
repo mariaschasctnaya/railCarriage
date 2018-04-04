@@ -251,13 +251,15 @@ var StationTimeTable = {
         $.ajax({
             url: "train/status",
             async: false,
+            contentType: "application/json",
+            dataType: "json",
             method: 'PUT',
-            data: {
+            data: JSON.stringify({
                 "status" : status,
                 "station" : station,
                 "trainNumber" : trainNumber,
                 "delayTime" : (delayTime ? delayTime : null)
-            },
+            }),
             success: function (data) {
                 StationTimeTable.closeUpdateDialog();
                 StationTimeTable.clearDataTable();
@@ -316,6 +318,11 @@ var StationTimeTable = {
                     "targets": 2
                 },
                 {
+                    "mData": "stationSchedules",
+                    "render": function (data, type, row) {
+                        return "<div class='" + data[station].status + "'>" + data[station].status + "</div>";
+                    },
+                    "targets": 3
                 }
             ]
         });

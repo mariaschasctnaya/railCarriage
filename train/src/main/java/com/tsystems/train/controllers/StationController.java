@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-
+//Causes lombok to generate a logger field.
 @Slf4j
+//add the @Controller and @ResponseBody annotations
+//do not need to add @ResponseBody to all the request mapping methods.
 @RestController
+//annotation is need to set the controller's methods the address at which they will be available on the client
 @RequestMapping("/station")
 public class StationController extends BaseController {
 
@@ -54,5 +57,6 @@ public class StationController extends BaseController {
     public List<StationData> getAllStations() {
         return stationFacade.getStations(null, false);
     }
+
 
 }

@@ -5,7 +5,7 @@ import com.tsystems.train.facade.data.StationData;
 import org.springframework.stereotype.Component;
 
 @Component
-public class StationConverter implements DtoConverter <Station, StationData>{
+public class StationConverter implements DtoConverter<Station, StationData>{
     @Override
     public StationData convert(Station station) {
         return StationData.builder()

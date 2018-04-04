@@ -2,6 +2,7 @@ package com.tsystems.train.service;
 
 import com.tsystems.train.entity.Ticket;
 import com.tsystems.train.entity.Train;
+import com.tsystems.train.entity.User;
 import com.tsystems.train.exception.TicketSoldOutException;
 
 import java.util.List;
@@ -28,4 +29,11 @@ public interface TicketService {
      * @param train - train to search sold tickets for this train
      */
     void checkAvailableTickets(Train train);
+
+    /**
+     * Return tickets belong user
+     * @param user
+     * @return tickets
+     */
+    List<Ticket> getTicketsForUser(User user);
 }

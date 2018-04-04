@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Component
-public class RouteDataConverter implements DtoConverter<RouteData, Route>{
+public class RouteDataConverter implements DtoConverter<RouteData, Route> {
 
     @Autowired
     private StationService stationService;

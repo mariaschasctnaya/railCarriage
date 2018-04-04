@@ -28,7 +28,7 @@ public class TrainConverter implements DtoConverter<Train, TrainData> {
         RouteData routeData = routeConverter.convert(train.getRoute());
         Map<String, ScheduleData> stationSchedules = routeData.getStationSchedules().entrySet().stream()
                 .collect(Collectors.toMap(Map.Entry::getKey, entry -> getSchedule(train, entry),
-                        this::selectFirst, LinkedHashMap::new));
+                        this::selectFirst , LinkedHashMap::new));
         return TrainData.builder()
                 .id(train.getId())
                 .number(train.getNumber())

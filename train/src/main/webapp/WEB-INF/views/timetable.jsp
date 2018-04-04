@@ -38,10 +38,28 @@
                        class="btn br2 ">TRAINS</a>
                 </div>
 
-                <div class="col-md-4">
-                    <a href="<c:url value ="/login"/>"
-                       class="btn br2">LOG IN</a>
-                </div>
+                <c:choose>
+                    <c:when test="${pageContext.request.isUserInRole('ROLE_USER')}">
+                        <div class="col-md-4">
+                            <a href="<c:url value ="/personal"/>"
+                               class="btn br2">MY TICKETS</a>
+                        </div>
+                    </c:when>
+                    <c:when test="${pageContext.request.isUserInRole('ROLE_MANAGER')}">
+                        <div class="col-md-4">
+                            <a href="<c:url value ="/logout"/>"
+                               class="btn br2">LOG
+                                OUT</a>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="col-md-4">
+                            <a href="<c:url value ="/login"/>"
+                               class="btn br2">LOG
+                                IN</a>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
 

@@ -15,7 +15,6 @@ import java.util.List;
 public interface TrainRepository extends JpaRepository<Train,String> {
 
     Train findByNumber(String number);
-    List<Train> findByRoute(Route route);
     List<Train> findByRouteIn(Collection<Route> routes);
     @Modifying
     @Query("UPDATE Train st SET st.status = ?2 WHERE st.route = ?1")

@@ -21,7 +21,13 @@ public class Ticket {
     @JoinColumn(name = "train_id", nullable = false)
     private Train train;
 
+    @ManyToOne
+    private Station startStation;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "passenger_id", nullable = false)
     private Passenger passenger;
+
+    @ManyToOne
+    private User user;
 }

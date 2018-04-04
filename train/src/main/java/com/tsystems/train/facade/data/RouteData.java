@@ -31,3 +31,4 @@ public class RouteData {
     @Valid
     private Map<String, ScheduleData> stationSchedules;
 }
+

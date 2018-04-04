@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 @Service
 public class RouteServiceImpl implements RouteService {
 
+
     @Autowired
     private RouteRepository routeRepository;
     @Autowired
@@ -50,7 +51,7 @@ public class RouteServiceImpl implements RouteService {
     public List<Route> getRoutesByStation(String station) {
         log.debug("RouteService: find {} station in repository", station);
         Station stationEntity = stationRepository.findByName(station);
-        log.debug("RouteService: foud {} station in repository", stationEntity.getName());
+        log.debug("RouteService: foud {} station in repository", station);
         if(stationEntity == null)
             throw new RuntimeException();
         return routeRepository.findByStation(stationEntity);
@@ -63,7 +64,6 @@ public class RouteServiceImpl implements RouteService {
 
     @Override
     public Route getRouteById(String id) {
-
         return routeRepository.findById(id).orElse(null);
     }
 

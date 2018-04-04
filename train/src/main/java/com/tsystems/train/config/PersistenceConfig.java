@@ -1,5 +1,6 @@
 package com.tsystems.train.config;
 
+import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,9 +15,13 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
-
+/*Declare the configuration class*/
 @Configuration
+/*The annotation indicates to Spring that classes with the @Transactional annotation
+should be wrapped in an aspect of transactions.
+Now we can use the @Transactional annotation.*/
 @EnableTransactionManagement
+/*The @EnableJpaRepositories annotation activates the Spring Data JPA.*/
 @EnableJpaRepositories(basePackages = "com.tsystems.train.repository")
 public class PersistenceConfig {
 
@@ -33,7 +38,8 @@ public class PersistenceConfig {
         dataSource.setPassword(password);
         return dataSource;
     }
-
+    //A factory that contains a connection to the database, the entire configuration.
+    // The factory's point is to create an EntityManager.
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
@@ -42,7 +48,7 @@ public class PersistenceConfig {
         em.setPackagesToScan("com.tsystems.train.entity");
         return em;
     }
-
+    //Tell spring who the persistence provider is so that it can be used to create the EntityManagerFactory
     @Bean
     public JpaVendorAdapter jpaVendorAdapter() {
         HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
@@ -51,9 +57,18 @@ public class PersistenceConfig {
         hibernateJpaVendorAdapter.setDatabase(Database.MYSQL);
         return hibernateJpaVendorAdapter;
     }
-
+    //Initialization for TransactionManager
     @Bean
     public PlatformTransactionManager transactionManager() {
         return new JpaTransactionManager();
+    }
+
+    @Bean(initMethod = "migrate")
+    public Flyway flyway(DataSource dataSource) {
+        Flyway flyway = new Flyway();
+        flyway.setDataSource(dataSource);
+        flyway.setBaselineOnMigrate(true);
+        flyway.setBaselineVersionAsString("1");
+        return flyway;
     }
 }

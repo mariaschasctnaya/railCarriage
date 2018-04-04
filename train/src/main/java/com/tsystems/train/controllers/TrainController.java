@@ -5,6 +5,7 @@ import com.tsystems.train.facade.TrainFacade;
 import com.tsystems.train.facade.data.ResponseData;
 import com.tsystems.train.facade.data.SearchTrainData;
 import com.tsystems.train.facade.data.TrainData;
+import com.tsystems.train.facade.data.UpdateTrainData;
 import com.tsystems.train.facade.json.View;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,16 @@ public class TrainController {
         log.debug("TrainController: search available trains for {} between {} and {}", searchTrainData.getStartDate(), searchTrainData.getDeparture(), searchTrainData.getArrived());
         return trainFacade.searchTrains(searchTrainData);
     }
+
+    @PutMapping("/status")
+    @Secured("ROLE_MANAGER")
+    public ResponseData updateStatus(@RequestBody UpdateTrainData data) {
+        trainFacade.updateStatus(data.getTrainNumber(), data.getStation(), data.getStatus(), data.getDelayTime());
+        return new ResponseData();
+    }
+
+
+
     @DeleteMapping("/{id}")
     @Secured("ROLE_MANAGER")
     public ResponseData archiveTrain(@PathVariable String id) {

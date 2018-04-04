@@ -2,6 +2,8 @@ package com.tsystems.train.service.impl;
 
 import com.tsystems.train.entity.Ticket;
 import com.tsystems.train.entity.Train;
+import com.tsystems.train.entity.User;
+import com.tsystems.train.exception.PassengerExistsException;
 import com.tsystems.train.exception.TicketSoldOutException;
 import com.tsystems.train.repository.TicketRepository;
 import com.tsystems.train.service.TicketService;
@@ -43,11 +45,16 @@ public class TicketServiceImpl implements TicketService {
         }
     }
 
+    @Override
+    public List<Ticket> getTicketsForUser(User user) {
+        return ticketRepository.findByUser(user);
+    }
+
     private void checkExistingPassengers(Ticket ticket) {
         log.debug("TicketService: check passenger {}", ticket.getPassenger());
         if (ticket.getPassenger().getId() != null) {
             if (ticketRepository.existsByTrainAndPassenger(ticket.getTrain(), ticket.getPassenger())) {
-                throw new IllegalArgumentException("Passenger was already registered");
+                throw new PassengerExistsException();
             }
         }
     }

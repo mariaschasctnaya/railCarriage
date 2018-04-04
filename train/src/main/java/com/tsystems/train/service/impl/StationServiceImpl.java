@@ -32,7 +32,7 @@ public class StationServiceImpl implements StationService {
             log.debug("StationService: request all stations from repository");
             return stationRepository.findAll();
         } else {
-            log.debug("StationService: request stations like {} from repository", station.toString());
+            log.debug("StationService: request stations like {} from repository", station);
             return stationRepository.findByNameIsLike(station);
         }
     }

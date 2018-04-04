@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -39,14 +40,11 @@ public class TrainServiceImpl implements TrainService {
         return trainRepository.findByNumber(trainNumber);
     }
 
-
     @Override
     public void checkAvailableTrainByStation(Train train, String station) {
         log.debug("TrainService: check available train {} for station {}", train.getNumber(), station);
         Optional.ofNullable(train.getRoute())
-                //if there is a route - converting routes to stream routes
                 .map(Stream::of)
-                //if there is no route  -return an empty stream
                 .orElseGet(Stream::empty)
                 .map(Route::getRouteEntries).flatMap(Collection::stream)
                 .filter(routeEntry -> filterRouteByStation(routeEntry, station))
@@ -55,6 +53,7 @@ public class TrainServiceImpl implements TrainService {
                 .ifPresent(this::checkSchedule);
 
     }
+
     private void checkSchedule(Schedule schedule) {
         long leftMinutes = LocalDateTime.now().until(schedule.getDeparture(), ChronoUnit.MINUTES);
         if (leftMinutes < minimumLeftMinutes) {
@@ -76,7 +75,7 @@ public class TrainServiceImpl implements TrainService {
         return trainRepository.findByRouteIn(routes);
     }
 
-    private boolean filterByDate(Route route, String departureStation,String arrivedStation, LocalDateTime startDate, LocalDateTime endDate) {
+    private boolean filterByDate(Route route, String departureStation, String arrivedStation, LocalDateTime startDate, LocalDateTime endDate) {
         log.debug("TrainService: filter available trains for station {} by time between {} and {} ", departureStation, startDate, endDate);
         RouteEntry departureEntry = route.getRouteEntries().stream().filter(routeEntry -> routeEntry.getStation().getName().equals(departureStation)).findFirst().orElse(null);
         RouteEntry arrivalEntry = route.getRouteEntries().stream().filter(routeEntry -> routeEntry.getStation().getName().equals(arrivedStation)).findFirst().orElse(null);
@@ -119,5 +118,10 @@ public class TrainServiceImpl implements TrainService {
     @Transactional
     public void archive(Train train) {
         trainRepository.updateStatus(train.getId(), EntityStatus.ARCHIVED);
+    }
+
+    @Override
+    public List<Train> getTrainsByRoute(Route route) {
+        return trainRepository.findByRouteIn(Collections.singleton(route));
     }
 }

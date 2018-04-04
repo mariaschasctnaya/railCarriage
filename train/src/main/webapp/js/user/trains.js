@@ -93,10 +93,7 @@ function searchTrain (depStation,arrStation,dateDeparture,val0,val1) {
                         "dataType": 'json',
                         "type": "GET",
                         "async": false,
-                        "url": "/train/ticket",
-                        "data":{
-                            "number":row.number
-                        },
+                        "url": "ticket/" + row.number,
                         "success": function(result){
                             places = row.places - result;
                         }

@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.Map;
 
+
 @Builder(toBuilder = true)
 @Getter
 @NoArgsConstructor
@@ -40,3 +41,4 @@ public class TrainData {
     @JsonView(View.UI.class)
     private int places;
 }
+

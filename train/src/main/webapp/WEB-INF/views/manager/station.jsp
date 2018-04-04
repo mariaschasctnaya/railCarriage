@@ -77,44 +77,72 @@
     <div class="container filter-blur rounded popin" id="stationTimetable">
         <h4>Station's timetable</h4>
         <table id="timetable_table" class="table table-hover display" cellspacing="0" width="100%">
+            <button id="updateStatus" class="btn br2" disabled>Update</button>
             <thead>
             <tr>
                 <th>Train</th>
                 <th>Arrival</th>
                 <th>Departure</th>
+                <th>Status</th>
             </tr>
             </thead>
             <tbody id="timetable_body" class="table table-hover text-dark">
             </tbody>
         </table>
     </div>
-
-</div>
-<%--//////////////////////////////Modal Create train///////////////////////////////////--%>
-<div class="text-light">
-    <div id="dialog-form" class="modal fade">
-        <div class="modal-dialog popap">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">New Station</h4>
-                    <button id="closeCreateDialog" type="button" class="close">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div id="block_error" class="alert alert-danger invisible">
-                        <a id="close_message" class="close" href="<c:url value="#"/>">×</a><span
-                            id="errorMessage"></span>
+    <div class="text-light">
+        <div id="dialog-update" class="modal fade">
+            <div class="modal-dialog popap">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Update train status</h4>
+                        <button id="closeUpdateDialog" type="button" class="close">&times;</button>
                     </div>
-                    <form id="station_form">
-                        <fieldset>
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" name="name" id="name"
-                                   class="form-field text ui-widget-content ui-corner-all">
-                        </fieldset>
-                    </form>
+                    <div class="modal-body">
+                        <select id="selectStatus" name="selectStatus">
+                            <option value="OK">OK</option>
+                            <option value="DELAYED">DELAYED</option>
+                            <option value="CANCELED">CANCELED</option>
+                        </select>
+                        <div id="delay" style="display: none">
+                            <label for="delayTime">Delay in minutes</label>
+                            <input name="delayTime" type="text" id="delayTime"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="closeUpdateDialogA" type="button" class="btn br2">Close</button>
+                        <button type="button" id="updateStatusButton" class="btn br2">Update</button>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button  id="closeCreateDialogA"  class="btn br2">Close</button>
-                    <button  id="createStationButton" class="btn br2">Create</button>
+            </div>
+        </div>
+    </div>
+    <%--//////////////////////////////Modal Create train///////////////////////////////////--%>
+    <div class="text-light">
+        <div id="dialog-form" class="modal fade">
+            <div class="modal-dialog popap">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">New Station</h4>
+                        <button id="closeCreateDialog" type="button" class="close">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="block_error" class="alert alert-danger invisible">
+                            <a id="close_message" class="close" href="<c:url value="#"/>">×</a><span
+                                id="errorMessage"></span>
+                        </div>
+                        <form id="station_form">
+                            <fieldset>
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" name="name" id="name"
+                                       class="form-field text ui-widget-content ui-corner-all">
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button  id="closeCreateDialogA"  class="btn br2">Close</button>
+                        <button  id="createStationButton" class="btn br2">Create</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -122,10 +150,10 @@
 
     <%--/////////////////////////Modal Archive train///////////////////////////////////--%>
     <div id="dialog-remove" class="modal fade">
-        <div class="modal-dialog popap">
-            <div class="modal-content">
+        <div class="modal-dialog popap  modal-lg">
+            <div class="modal-content text-light">
                 <div class="modal-header">
-                    <h4 class="modal-title">Delete Station</h4>
+                    <h4 class="modal-title">Archive Station</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -140,6 +168,6 @@
             </div>
         </div>
     </div>
-<div id="toTop" class="text-light">^</div>
+    <div id="toTop" class="text-light">^</div>
 </body>
 </html>

@@ -9,14 +9,16 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.Map;
 import java.util.Set;
-
+////Defines the logic to validate constraint  @ScheduleConstraint
 public class ScheduleValidator implements ConstraintValidator<ScheduleConstraint, Map<String, ScheduleData>> {
     @Override
+    //Initializes the validator in preparation for isValid calls.
     public void initialize(ScheduleConstraint constraintAnnotation) {
 
     }
 
     @Override
+    //Implements the validation logic
     public boolean isValid(Map<String, ScheduleData> value, ConstraintValidatorContext context) {
         Set<Map.Entry<String, ScheduleData>> entries = value.entrySet();
         Map.Entry<String, ScheduleData> prevSchedule = null;

@@ -11,14 +11,21 @@ import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import java.util.List;
-
+/*Declare the configuration class*/
 @Configuration
+
+/* Turn on MVC
+*  It allows to support @Controller-annotated classes
+*  that use @RequestMapping to map incoming requests to a specific method.*/
 @EnableWebMvc
+
+/*Specify the Spring framework where to search for components*/
 @ComponentScan("com.tsystems.train.controllers")
 public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
+        //register view controllers that create a direct mapping between the URL and the view name
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/routes").setViewName("manager/routes");
         registry.addViewController("/stations").setViewName("manager/station");
@@ -27,18 +34,22 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("index");
         registry.addViewController("/tickets").setViewName("tickets");
         registry.addViewController("/passengers").setViewName("manager/passengers");
+        registry.addViewController("/personal").setViewName("personal");
     }
 
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        // specify where our web pages are located
         resolver.setPrefix("/WEB-INF/views/");
+        // format View which  will use
         resolver.setSuffix(".jsp");
         registry.viewResolver(resolver);
     }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        //Connecting static resources
         registry.addResourceHandler("/css/**")
                 .addResourceLocations("/css/");
         registry.addResourceHandler("/js/**")

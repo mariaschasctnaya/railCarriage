@@ -16,6 +16,7 @@ import java.util.stream.Stream;
 
 @Component
 public class StationFacadeImpl implements StationFacade {
+
     @Autowired
     private StationService stationService;
     @Autowired
@@ -24,8 +25,6 @@ public class StationFacadeImpl implements StationFacade {
     private DtoConverter<Station, StationData> stationConverter;
     @Autowired
     private RouteFacade routeFacade;
-
-
 
     @Override
     public void createStation(StationData stationData) {
@@ -56,6 +55,5 @@ public class StationFacadeImpl implements StationFacade {
     private boolean filterByStatus(Station station) {
         return station.getStatus() == EntityStatus.ACTIVE;
     }
-
-
 }
+
